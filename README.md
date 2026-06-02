@@ -77,6 +77,7 @@ Aktuell führt die Pipeline kein `terraform apply` aus. Das ist bewusst so, weil
 git status
 git branch
 git log --oneline
+```
 
 ## Azure OIDC Vorbereitung
 
