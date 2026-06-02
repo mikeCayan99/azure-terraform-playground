@@ -77,3 +77,31 @@ Aktuell führt die Pipeline kein `terraform apply` aus. Das ist bewusst so, weil
 git status
 git branch
 git log --oneline
+
+## Azure OIDC Vorbereitung
+
+Für `terraform plan` und später `terraform apply` in GitHub Actions muss sich der GitHub Runner bei Azure authentifizieren.
+
+Aktuell funktionieren in GitHub Actions:
+
+- `terraform fmt`
+- `terraform init`
+- `terraform validate`
+
+Ein `terraform plan` benötigt jedoch Zugriff auf Azure, weil Terraform prüfen muss, welche Ressourcen in der Azure Subscription existieren oder erstellt werden sollen.
+
+Dafür verwenden wir später OpenID Connect (OIDC), statt ein dauerhaftes Client Secret in GitHub zu speichern.
+
+OIDC bedeutet:
+
+- GitHub Actions fordert zur Laufzeit ein kurzlebiges Token an.
+- Azure vertraut diesem Token nur für ein bestimmtes Repository und einen bestimmten Branch oder Workflow.
+- Es wird kein dauerhaftes Passwort oder Client Secret gespeichert.
+
+Später benötigen wir dafür folgende Werte als GitHub Repository Variables:
+
+- `AZURE_CLIENT_ID`
+- `AZURE_TENANT_ID`
+- `AZURE_SUBSCRIPTION_ID`
+
+Zusätzlich muss in Azure eine App Registration mit Federated Credential erstellt werden.
