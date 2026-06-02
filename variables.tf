@@ -3,29 +3,25 @@ variable "project_name" {
   type        = string
   default     = "tfplayground"
 
-
   validation {
     condition     = length(var.project_name) >= 3 && length(var.project_name) <= 20
     error_message = "The project_name must be between 3 and 20"
   }
-
 }
 
-variable "enviroment" {
-  description = "Deployment enviroment"
+variable "environment" {
+  description = "Deployment environment"
   type        = string
   default     = "dev"
 
-
   validation {
-    condition     = contains(["dev", "test", "prod"], var.enviroment)
-    error_message = "The enviroment must be one of: dev, test, prod."
+    condition     = contains(["dev", "test", "prod"], var.environment)
+    error_message = "The environment must be one of: dev, test, prod."
   }
-
 }
 
 variable "location" {
-  description = "Azure region where resources wil lbe created"
+  description = "Azure region where resources will be created"
   type        = string
   default     = "westeurope"
 }
@@ -39,4 +35,3 @@ variable "tags" {
     purpose    = "learning"
   }
 }
-
