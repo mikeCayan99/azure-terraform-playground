@@ -106,3 +106,25 @@ Später benötigen wir dafür folgende Werte als GitHub Repository Variables:
 - `AZURE_SUBSCRIPTION_ID`
 
 Zusätzlich muss in Azure eine App Registration mit Federated Credential erstellt werden.
+
+## Terraform Modules
+
+This repository uses reusable Terraform modules.
+
+Current modules:
+
+- `modules/resource-group`
+
+The root module calls child modules and passes variables into them.
+
+Example:
+
+```hcl
+module "resource_group" {
+  source = "./modules/resource-group"
+
+  project_name = var.project_name
+  environment  = var.environment
+  location     = var.location
+  tags         = var.tags
+}
