@@ -36,3 +36,44 @@ Dieses Repository ist ein Lernprojekt. Ressourcen sollen nur bewusst erstellt un
 - `apply` nur manuell
 - Ressourcen nicht unnötig über Nacht laufen lassen
 - Zielbudget: maximal 50 Euro
+
+## Terraform-Struktur
+
+Dieses Repository nutzt eine einfache Terraform-Dateistruktur:
+
+- `versions.tf` definiert die benötigte Terraform-Version und Provider-Versionen.
+- `providers.tf` konfiguriert den AzureRM Provider.
+- `variables.tf` enthält Eingabevariablen wie Projektname, Umgebung, Region und Tags.
+- `main.tf` enthält die eigentlichen Azure-Ressourcen.
+- `outputs.tf` gibt wichtige Werte aus, zum Beispiel Resource-Group-Name oder Resource-Group-ID.
+- `.terraform.lock.hcl` speichert die konkret verwendete Provider-Version und sollte mit committed werden.
+
+Der Ordner `.terraform/` wird nicht committed, weil er lokal durch `terraform init` erzeugt wird.
+
+## GitHub Actions Pipeline
+
+Die Datei `.github/workflows/terraform-checks.yml` definiert unsere erste CI-Pipeline.
+
+Diese Pipeline läuft bei:
+
+- Push auf `main`
+- Push auf Branches mit `feature/**`
+- Pull Requests gegen `main`
+- manuellem Start über `workflow_dispatch`
+
+Die Pipeline führt folgende Schritte aus:
+
+1. `actions/checkout@v4` lädt den Repository-Code in den GitHub Runner.
+2. `hashicorp/setup-terraform@v3` installiert Terraform.
+3. `terraform fmt -check -recursive` prüft die Formatierung.
+4. `terraform init -backend=false` initialisiert Terraform ohne Remote Backend.
+5. `terraform validate` prüft die Terraform-Konfiguration.
+
+Aktuell führt die Pipeline kein `terraform apply` aus. Das ist bewusst so, weil `apply` echte Azure-Ressourcen erstellen und Kosten verursachen kann.
+
+## Wichtige lokale Befehle
+
+```powershell
+git status
+git branch
+git log --oneline
