@@ -1,11 +1,9 @@
-resource "azurerm_resource_group" "main" {
-  name     = "rg-${var.project_name}-${var.environment}"
-  location = var.location
+module "resource_group" {
+  source = "./modules/resource-group"
 
-  tags = merge(
-    var.tags,
-    {
-      environment = var.environment
-    }
-  )
+  project_name = var.project_name
+  environment  = var.environment
+  location     = var.location
+  tags         = var.tags
+
 }
