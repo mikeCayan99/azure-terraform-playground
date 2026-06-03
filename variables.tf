@@ -35,3 +35,11 @@ variable "tags" {
     purpose    = "learning"
   }
 }
+
+variable "virtual_network_address_space" {
+  description = "Adress space for the Vnet"
+  type        = list(string)
+  default     = ["10.10.0.0/16"]
+}
+
+
