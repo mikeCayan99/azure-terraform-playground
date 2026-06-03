@@ -12,3 +12,21 @@ output "resource_group_id" {
   description = "Azure resource ID of the created RG"
   value       = module.resource_group.resource_group_id
 }
+
+output "virtual_network_name" {
+  description = "Name of the created Azure Vnet"
+  value       = module.virtual_network.virtual_network_name
+}
+
+output "virtual_network_id" {
+  description = "Azure resource ID of the Vnet"
+  value       = module.virtual_network.virtual_network_id
+}
+
+output "virtual_network_address_space" {
+  description = "Adress space of the Vnet"
+  value       = module.virtual_network.virtual_network_address_space
+}
+
+
+
