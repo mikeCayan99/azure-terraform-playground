@@ -19,3 +19,14 @@ module "virtual_network" {
   tags                = var.tags
 }
 
+module "default_subnet" {
+  source = "./modules/subnet"
+
+  name                 = "snet-${var.project_name}-${var.environment}-default"
+  resource_group_name  = module.resource_group.resource_group_name
+  virtual_network_name = module.virtual_network.virtual_network_name
+  address_prefixes     = var.subnet_adress_prefixes
+}
+
+
+
