@@ -42,11 +42,6 @@ variable "virtual_network_address_space" {
   default     = ["10.10.0.0/16"]
 }
 
-variable "subnet_adress_prefixes" {
-  description = "Adress prefixes for default subnet"
-  type        = list(string)
-  default     = ["10.10.1.0/24"]
-}
 
 variable "subnet_address_prefixes" {
   description = "Address prefixes for the default subnet."
