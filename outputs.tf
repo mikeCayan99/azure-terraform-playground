@@ -27,6 +27,21 @@ output "virtual_network_address_space" {
   description = "Adress space of the Vnet"
   value       = module.virtual_network.virtual_network_address_space
 }
+output "default_subnet_name" {
+  description = "Name of the created default subnet."
+  value       = module.default_subnet.subnet_name
+}
+
+output "default_subnet_id" {
+  description = "Azure resource ID of the created default subnet."
+  value       = module.default_subnet.subnet_id
+}
+
+output "default_subnet_address_prefixes" {
+  description = "Address prefixes of the created default subnet."
+  value       = module.default_subnet.subnet_address_prefixes
+}
+
 
 
 
