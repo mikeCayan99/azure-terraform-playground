@@ -29,4 +29,15 @@ module "default_subnet" {
 }
 
 
+module "default_nsg" {
+  source = "./modules/NSG"
+
+  name                = "nsg-${var.project_name}-${var.environment}-default"
+  location            = var.location
+  resource_group_name = module.resource_group.resource_group_name
+  environment         = var.environment
+  tags                = var.tags
+
+}
+
 

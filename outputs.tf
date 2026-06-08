@@ -42,6 +42,14 @@ output "default_subnet_address_prefixes" {
   value       = module.default_subnet.subnet_address_prefixes
 }
 
+output "default_nsg_name" {
+  description = "Name of the created default Network Security Group."
+  value       = module.default_nsg.network_security_group
+}
 
+output "default_nsg_id" {
+  description = "Azure resource ID of the created default Network Security Group."
+  value       = module.default_nsg.network_security_group_id
+}
 
 
