@@ -30,7 +30,7 @@ module "default_subnet" {
 
 
 module "default_nsg" {
-  source = "./modules/NSG"
+  source = "./modules/network-security-group"
 
   name                = "nsg-${var.project_name}-${var.environment}-default"
   location            = var.location

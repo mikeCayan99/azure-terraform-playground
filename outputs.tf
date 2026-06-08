@@ -44,7 +44,7 @@ output "default_subnet_address_prefixes" {
 
 output "default_nsg_name" {
   description = "Name of the created default Network Security Group."
-  value       = module.default_nsg.network_security_group
+  value       = module.default_nsg.network_security_group_name
 }
 
 output "default_nsg_id" {
