@@ -52,4 +52,10 @@ output "default_nsg_id" {
   value       = module.default_nsg.network_security_group_id
 }
 
+output "default_subnet_nsg_association_id" {
+  description = "Azure resource ID of the default subnet to nsg associate"
+  value       = module.default_subnet_nsg_association.association_id
+
+}
+
 
