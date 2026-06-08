@@ -40,4 +40,12 @@ module "default_nsg" {
 
 }
 
+module "default_subnet_nsg_association" {
+  source = "./modules/subnet-nsg-association"
+
+  subnet_id                 = module.default_subnet.subnet_id
+  network_security_group_id = module.default_nsg.network_security_group_id
+}
+
+
 
