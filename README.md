@@ -1,6 +1,6 @@
 # Azure Terraform Network Foundation
 
-A modular Terraform project that builds a reusable Azure network foundation using Terraform, GitHub Actions, and Azure OpenID Connect (OIDC) authentication.
+A modular Terraform project that builds a reusable Azure network foundation using Terraform, GitHub Actions, and Azure OpenID Connect (OIDC) authentication. This repository serves as my personal learning project for Terraform, Azure, GitHub Actions, and Infrastructure as Code (IaC).
 
 ## Features
 
@@ -20,14 +20,14 @@ A modular Terraform project that builds a reusable Azure network foundation usin
 ```mermaid
 flowchart TD
 
-RG[Resource Group] --> VNET[Virtual Network]
+RG["Resource Group"] --> VNET["Virtual Network"]
 
-VNET --> WEB[Web Subnet]
-VNET --> APP[Application Subnet]
-VNET --> DATA[Data Subnet]
+VNET --> WEB["Web Subnet"]
+VNET --> APP["Application Subnet"]
+VNET --> DATA["Data Subnet"]
 
-NSG[Network Security Group]
-NSG --> ASSOC[NSG Association]
+NSG["Network Security Group"]
+NSG --> ASSOC["NSG Association"]
 ASSOC --> WEB
 ```
 
