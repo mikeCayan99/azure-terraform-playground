@@ -29,6 +29,11 @@ VNET --> DATA["Data Subnet"]
 NSG["Network Security Group"]
 NSG --> ASSOC["NSG Association"]
 ASSOC --> WEB
+
+
+The NSG is currently associated with the Web Subnet.
+
+
 ```
 
 ## Repository Structure
