@@ -72,20 +72,49 @@ output "data_subnet_address_prefixes" {
   value       = module.data_subnet.subnet_address_prefixes
 }
 
-output "default_nsg_name" {
-  description = "Name of the created default Network Security Group."
-  value       = module.default_nsg.network_security_group_name
+output "web_nsg_name" {
+  description = "Name of the Web Network Security Group."
+  value       = module.web_nsg.network_security_group_name
 }
 
-output "default_nsg_id" {
-  description = "Azure resource ID of the created default Network Security Group."
-  value       = module.default_nsg.network_security_group_id
+output "web_nsg_id" {
+  description = "Azure resource ID of the Web Network Security Group."
+  value       = module.web_nsg.network_security_group_id
 }
 
-output "default_subnet_nsg_association_id" {
-  description = "Azure resource ID of the default subnet to nsg associate"
-  value       = module.default_subnet_nsg_association.association_id
+output "app_nsg_name" {
+  description = "Name of the App Network Security Group."
+  value       = module.app_nsg.network_security_group_name
+}
 
+output "app_nsg_id" {
+  description = "Azure resource ID of the App Network Security Group."
+  value       = module.app_nsg.network_security_group_id
+}
+
+output "data_nsg_name" {
+  description = "Name of the Data Network Security Group."
+  value       = module.data_nsg.network_security_group_name
+}
+
+output "data_nsg_id" {
+  description = "Azure resource ID of the Data Network Security Group."
+  value       = module.data_nsg.network_security_group_id
+}
+
+output "web_subnet_nsg_association_id" {
+  description = "Azure resource ID of the Web subnet to NSG association."
+  value       = module.web_subnet_nsg_association.association_id
+}
+
+output "app_subnet_nsg_association_id" {
+  description = "Azure resource ID of the App subnet to NSG association."
+  value       = module.app_subnet_nsg_association.association_id
+}
+
+output "data_subnet_nsg_association_id" {
+  description = "Azure resource ID of the Data subnet to NSG association."
+  value       = module.data_subnet_nsg_association.association_id
 }
 
 

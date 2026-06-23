@@ -47,22 +47,97 @@ module "data_subnet" {
 }
 
 
-module "default_nsg" {
+module "web_nsg" {
   source = "./modules/network-security-group"
 
-  name                = "nsg-${var.project_name}-${var.environment}-default"
+  name                = "nsg-${var.project_name}-${var.environment}-web"
   location            = var.location
   resource_group_name = module.resource_group.resource_group_name
   environment         = var.environment
   tags                = var.tags
 
+  security_rules = [
+    {
+      name                       = "Allow-HTTPS-Inbound"
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "443"
+      source_address_prefix      = "Internet"
+      destination_address_prefix = "*"
+    }
+  ]
 }
 
-module "default_subnet_nsg_association" {
+module "app_nsg" {
+  source = "./modules/network-security-group"
+
+  name                = "nsg-${var.project_name}-${var.environment}-app"
+  location            = var.location
+  resource_group_name = module.resource_group.resource_group_name
+  environment         = var.environment
+  tags                = var.tags
+
+  security_rules = [
+    {
+      name                       = "Allow-Web-To-App"
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "8080"
+      source_address_prefix      = var.web_subnet_address_prefixes[0]
+      destination_address_prefix = "*"
+    }
+  ]
+}
+
+module "data_nsg" {
+  source = "./modules/network-security-group"
+
+  name                = "nsg-${var.project_name}-${var.environment}-data"
+  location            = var.location
+  resource_group_name = module.resource_group.resource_group_name
+  environment         = var.environment
+  tags                = var.tags
+
+  security_rules = [
+    {
+      name                       = "Allow-App-To-Data"
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "1433"
+      source_address_prefix      = var.app_subnet_address_prefixes[0]
+      destination_address_prefix = "*"
+    }
+  ]
+}
+
+module "web_subnet_nsg_association" {
   source = "./modules/subnet-nsg-association"
 
   subnet_id                 = module.web_subnet.subnet_id
-  network_security_group_id = module.default_nsg.network_security_group_id
+  network_security_group_id = module.web_nsg.network_security_group_id
+}
+
+module "app_subnet_nsg_association" {
+  source = "./modules/subnet-nsg-association"
+
+  subnet_id                 = module.app_subnet.subnet_id
+  network_security_group_id = module.app_nsg.network_security_group_id
+}
+
+module "data_subnet_nsg_association" {
+  source = "./modules/subnet-nsg-association"
+
+  subnet_id                 = module.data_subnet.subnet_id
+  network_security_group_id = module.data_nsg.network_security_group_id
 }
 
 
