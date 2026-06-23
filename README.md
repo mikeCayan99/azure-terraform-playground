@@ -9,9 +9,9 @@ A modular Terraform project that builds a reusable Azure network foundation usin
 * Web Subnet
 * Application Subnet
 * Data Subnet
-* Network Security Group (NSG)
-* HTTPS Inbound Rule
-* Subnet-to-NSG Association
+* Multi-tier Network Security Groups (NSGs)
+* Tier-to-Tier Security Rules
+* Subnet-to-NSG Associations
 * GitHub Actions CI Pipeline
 * Azure OIDC Authentication
 
@@ -26,13 +26,16 @@ VNET --> WEB["Web Subnet"]
 VNET --> APP["Application Subnet"]
 VNET --> DATA["Data Subnet"]
 
-NSG["Network Security Group"]
-NSG --> ASSOC["NSG Association"]
-ASSOC --> WEB
-
+WEBNSG["Web NSG"] --> WEB
+APPNSG["App NSG"] --> APP
+DATANSG["Data NSG"] --> DATA
 ```
-The NSG is currently associated with the Web Subnet.
 
+The project demonstrates a basic multi-tier network architecture.
+
+- The Web subnet allows HTTPS traffic from the Internet.
+- The App subnet only allows traffic from the Web subnet.
+- The Data subnet only allows traffic from the App subnet.
 
 ## Repository Structure
 
@@ -105,7 +108,7 @@ For most learning scenarios, running `terraform plan` is sufficient.
 
 ## Status
 
-**Version:** v1.0
+**Version:** v1.1
 
 **Status:** Complete
 
