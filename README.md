@@ -1,6 +1,8 @@
 # Azure Terraform Network Foundation
 
-A modular Terraform project that builds a reusable Azure network foundation using Terraform, GitHub Actions, and Azure OpenID Connect (OIDC) authentication. This repository serves as my personal learning project for Terraform, Azure, GitHub Actions, and Infrastructure as Code (IaC).
+A modular Terraform project for provisioning a reusable Azure network foundation using Infrastructure as Code (IaC), GitHub Actions, and Azure OpenID Connect (OIDC) authentication.
+
+The repository implements a segmented multi-tier network architecture with reusable Terraform modules and automated infrastructure validation.
 
 ## Features
 
@@ -31,11 +33,12 @@ APPNSG["App NSG"] --> APP
 DATANSG["Data NSG"] --> DATA
 ```
 
-The project demonstrates a basic multi-tier network architecture.
+The infrastructure follows a basic three-tier network segmentation model:
 
-- The Web subnet allows HTTPS traffic from the Internet.
-- The App subnet only allows traffic from the Web subnet.
-- The Data subnet only allows traffic from the App subnet.
+* The Web subnet accepts HTTPS traffic from the Internet.
+* The Application subnet accepts traffic from the Web subnet.
+* The Data subnet accepts traffic from the Application subnet.
+* Network Security Groups enforce traffic boundaries between the individual tiers.
 
 ## Repository Structure
 
@@ -48,36 +51,61 @@ modules/
 └── subnet-nsg-association
 ```
 
+Infrastructure components are separated into reusable Terraform modules to keep the configuration maintainable and extensible.
+
 ## Local Usage
+
+Initialize Terraform:
 
 ```powershell
 terraform init
+```
+
+Validate the configuration:
+
+```powershell
 terraform validate
+```
+
+Review the planned infrastructure changes:
+
+```powershell
 terraform plan
 ```
 
-Optional deployment:
+Deploy the infrastructure when required:
 
 ```powershell
 terraform apply
+```
+
+Remove deployed resources:
+
+```powershell
 terraform destroy
 ```
 
 ## CI/CD
 
-GitHub Actions automatically runs:
+GitHub Actions automatically performs Terraform validation for repository changes.
 
-* terraform fmt
-* terraform init
-* terraform validate
-* terraform plan
+The pipeline includes:
 
-## Skills Demonstrated
+* `terraform fmt`
+* `terraform init`
+* `terraform validate`
+* `terraform plan`
+
+Azure authentication is handled through OpenID Connect (OIDC), avoiding long-lived Azure credentials in GitHub.
+
+## Technical Focus
 
 * Terraform Modules
 * Variables and Outputs
-* Azure Networking
+* Azure Virtual Networks
+* Azure Subnets
 * Network Security Groups
+* Network Segmentation
 * GitHub Actions
 * Azure OIDC Authentication
 * Pull Request Workflow
@@ -85,26 +113,16 @@ GitHub Actions automatically runs:
 
 ## Cost Awareness
 
-This project is primarily intended for learning Terraform and Azure networking concepts.
+The infrastructure is designed so that Terraform configuration and planned changes can be reviewed before resources are deployed.
 
-The recommended workflow is:
+Before applying infrastructure changes:
 
-```powershell
-terraform init
-terraform validate
-terraform plan
-```
-
-No Azure resources need to be deployed to understand the project structure and Terraform concepts.
-
-If you choose to deploy the infrastructure:
-
-* Review the Terraform plan before applying changes.
+* Review the Terraform plan.
+* Verify the resources that will be created.
 * Monitor Azure resource costs.
-* Remove test resources after use.
-* Avoid leaving resources running unnecessarily.
+* Remove temporary infrastructure when it is no longer required.
 
-For most learning scenarios, running `terraform plan` is sufficient.
+Running `terraform plan` does not provision Azure resources.
 
 ## Status
 
@@ -112,4 +130,4 @@ For most learning scenarios, running `terraform plan` is sufficient.
 
 **Status:** Complete
 
-Foundation project for future Azure Landing Zone and Infrastructure projects.
+This repository provides a reusable Azure networking foundation that can be extended with additional infrastructure components and larger Azure platform architectures.
