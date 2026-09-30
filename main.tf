@@ -5,7 +5,6 @@ module "resource_group" {
   environment  = var.environment
   location     = var.location
   tags         = var.tags
-
 }
 
 module "virtual_network" {

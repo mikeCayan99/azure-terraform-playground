@@ -1,24 +1,31 @@
 variable "name" {
-  type = string
+  description = "Name of the network security group."
+  type        = string
 }
 
 variable "location" {
-  type = string
+  description = "Azure region where the network security group will be deployed."
+  type        = string
 }
 
 variable "resource_group_name" {
-  type = string
+  description = "Name of the resource group where the network security group will be deployed."
+  type        = string
 }
 
 variable "environment" {
-  type = string
+  description = "Deployment environment, such as dev, test, or prod."
+  type        = string
 }
 
 variable "tags" {
-  type = map(string)
+  description = "Tags to apply to the network security group."
+  type        = map(string)
 }
 
 variable "security_rules" {
+  description = "List of security rules to configure on the network security group."
+
   type = list(object({
     name                       = string
     priority                   = number

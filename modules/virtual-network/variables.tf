@@ -1,24 +1,30 @@
 variable "project_name" {
-  type = string
+  description = "Name of the project used for resource naming."
+  type        = string
 }
 
 variable "environment" {
-  type = string
+  description = "Deployment environment, such as dev, test, or prod."
+  type        = string
 }
 
 variable "location" {
-  type = string
+  description = "Azure region where the virtual network will be deployed."
+  type        = string
 }
 
 variable "resource_group_name" {
-  type = string
+  description = "Name of the resource group where the virtual network will be deployed."
+  type        = string
 }
 
 variable "address_space" {
-  type = list(string)
+  description = "Address space assigned to the virtual network in CIDR notation."
+  type        = list(string)
 }
 
 variable "tags" {
-  type = map(string)
+  description = "Tags to apply to the virtual network."
+  type        = map(string)
 }
 
