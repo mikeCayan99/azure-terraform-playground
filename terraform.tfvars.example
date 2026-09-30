@@ -1,0 +1,25 @@
+project_name = "netfoundation"
+environment  = "dev"
+location     = "westeurope"
+
+tags = {
+  owner      = "your-name"
+  managed_by = "terraform"
+  purpose    = "learning"
+}
+
+virtual_network_address_space = [
+  "10.10.0.0/16"
+]
+
+web_subnet_address_prefixes = [
+  "10.10.1.0/24"
+]
+
+app_subnet_address_prefixes = [
+  "10.10.2.0/24"
+]
+
+data_subnet_address_prefixes = [
+  "10.10.3.0/24"
+]
